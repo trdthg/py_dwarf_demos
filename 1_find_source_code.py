@@ -1,9 +1,7 @@
 import posixpath
 from typing import List
 from elftools.elf.elffile import ELFFile
-from elftools.dwarf.descriptions import describe_DWARF_expr
-from elftools.dwarf.locationlists import LocationEntry
-from elftools.dwarf.lineprogram import LineProgram, LineState
+from elftools.dwarf.lineprogram import LineProgram
 
 
 def process_file(filename):

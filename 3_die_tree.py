@@ -1,22 +1,4 @@
-from __future__ import print_function
-from collections import defaultdict
-import os
-import sys
-import posixpath
-from typing import List
-
-import elftools.dwarf
-import elftools.dwarf.die
-import elftools.dwarf.lineprogram
-
-# If pyelftools is not installed, the example can also run from the root or
-# examples/ dir of the source distribution.
-sys.path[0:0] = [".", ".."]
-
-import elftools
 from elftools.dwarf.die import DIE
-from elftools.dwarf.dwarfinfo import CompileUnit
-from elftools.dwarf.lineprogram import LineProgram, LineProgramEntry, LineState
 from elftools.elf.elffile import ELFFile
 
 

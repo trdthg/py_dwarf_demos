@@ -1,4 +1,3 @@
-from collections import defaultdict
 import posixpath
 from typing import List
 from elftools.dwarf.lineprogram import LineProgram, LineProgramEntry, LineState
@@ -22,14 +21,12 @@ def process_file(filename):
 
 
 def process_lineprogram(line_program: LineProgram):
-    # 每个 Entry 对应源代码中的一行，并包含了源文件路径、行号、列号等信息。
     entries: List[LineProgramEntry] = line_program.get_entries()
     for i, entry in enumerate(entries):
         state: LineState = entry.state
         if state == None or state.file == 0:
             continue
 
-        # Line Program 是一个结构，它包含了一系列的 Line Table Entries
         print(
             f"addr: {hex(state.address)}, file_index: {entry_filename(line_program, state.file)} loc: {state.line}:{state.column}"
         )
