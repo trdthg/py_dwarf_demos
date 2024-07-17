@@ -10,20 +10,17 @@ def process_file(filename):
     with open(filename, "rb") as f:
         elffile = ELFFile(f)
 
-        # 获取所有的调试信息节
         dwarfinfo = elffile.get_dwarf_info()
 
-        # 遍历每一个调试信息节
         for cu in dwarfinfo.iter_CUs():
-            # 获取每一个调试信息单元的行信息
             line_program = dwarfinfo.line_program_for_CU(cu)
             if line_program is None:
                 continue
-            file_list = index2file(line_program)
+            file_list = get_files(line_program)
             print(file_list)
 
 
-def index2file(line_program: LineProgram):
+def get_files(line_program: LineProgram):
     lp_header: dict = line_program.header
     file_entries: List[str] = lp_header["file_entry"]
     directory = lp_header["include_directory"]

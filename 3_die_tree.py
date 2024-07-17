@@ -31,26 +31,9 @@ def process_file(filename):
 
         dwarfinfo = elffile.get_dwarf_info()
 
-        # get all entries in the .debug_info section
-        # for loop over all entries in the .debug_info section, print tag and attributes
-
-        # for loop over all entries in the .debug_info section, print tag and attributes
         for cu in dwarfinfo.iter_CUs():
-            process_cu(cu)
             for i, die in enumerate(cu.iter_DIEs()):
                 process_die(die, "  ", i)
-
-
-def process_cu(cu: CompileUnit):
-    line_program: LineProgram = cu.dwarfinfo.line_program_for_CU(cu)
-    entries: List[LineProgramEntry] = line_program.get_entries()
-    for i, entry in enumerate(entries):
-        state: LineState = entry.state
-
-        if state == None:
-            continue
-
-        # print(f"addr: {hex(state.address)}, loc: {state.line}:{state.column}")
 
 
 VISITED: dict = {}
@@ -58,7 +41,7 @@ VISITED: dict = {}
 
 def process_die(die: DIE, indent, index):
     if VISITED.get(die.offset) == True:
-        return
+        # return
         pass
     VISITED[die.offset] = True
 
@@ -74,7 +57,7 @@ def process_die(die: DIE, indent, index):
                 return
 
     if (len(list(die.iter_children()))) != 0:
-        if True:
+        if False:
             for i, child in enumerate(die.iter_children()):
                 process_die(child, indent + "    ", i)
 
